@@ -1,0 +1,54 @@
+GIT
+  remote: https://github.com/petertseng/cinch-game_bot.git
+  revision: 5de7c1ceab7ca30ba9ad51b63762c48a2fcdb93f
+  specs:
+    cinch-game_bot (1.0.0)
+      cinch
+
+GIT
+  remote: https://github.com/petertseng/secret_fascists.git
+  revision: 4704269c91a487ebdf16bf31753ea4fb0884873d
+  specs:
+    secret_fascists (1.0.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    cinch (2.3.1)
+    cinch-test (0.1.1)
+      cinch (~> 2)
+    diff-lcs (1.2.5)
+    docile (1.1.5)
+    json (1.8.3)
+    rspec (3.4.0)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+    rspec-core (3.4.4)
+      rspec-support (~> 3.4.0)
+    rspec-expectations (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-mocks (3.4.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-support (3.4.1)
+    simplecov (0.11.2)
+      docile (~> 1.1.0)
+      json (~> 1.8)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  cinch
+  cinch-game_bot!
+  cinch-test
+  rspec
+  secret_fascists!
+  simplecov
+
+BUNDLED WITH
+   1.11.2
