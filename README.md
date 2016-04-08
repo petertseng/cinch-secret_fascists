@@ -41,3 +41,9 @@ end
 
 bot.start
 ```
+
+## Configuration
+
+Along with the standard configuration options of [cinch-game_bot](https://github.com/petertseng/cinch-game_bot), this plugin supports the following plugin-specific configuration options:
+
+* `default_fascist_leader_name`: The default name of the leader of the Fascist (informed minority) team.
