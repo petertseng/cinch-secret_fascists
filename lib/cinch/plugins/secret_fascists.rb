@@ -156,16 +156,17 @@ module Cinch; module Plugins; class SecretFascists < GameBot
     success, error = game.take_choice(m.user, command, *args)
 
     if success
+      if voted
+        # the game doesn't ack the votes, we'll ack.
+        m.user.send("You voted #{command.upcase} for President #{voted_election.president} and Chancellor #{voted_election.chancellor}.")
+      end
+
       if game.winning_party
         channel = Channel(game.channel_name)
         channel.send(all_roles(game))
         channel.send(game_history(game, show_secrets: true))
         self.start_new_game(game)
       else
-        if voted
-          # the game doesn't ack the votes, we'll ack.
-          m.user.send("You voted #{command.upcase} for President #{game.current_election.president} and Chancellor #{game.current_election.chancellor}.")
-        end
         new_type = game.decision_type
         announce_decision(game) if new_type != old_type
       end
