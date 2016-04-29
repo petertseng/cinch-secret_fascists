@@ -111,8 +111,6 @@ RSpec.describe Cinch::Plugins::SecretFascists do
         expect(chan.messages).to be_all { |x| x.include?('selected Chancellor') }
         chan.messages.clear
 
-        # Until cinch-test's double-PM bug is fixed, this may emit some errors.
-        # That's OK.
         players.each { |p| get_replies(pm('!nein', nick: p)) }
         expect(chan.messages).to be_any { |x| x.include?('rejected') }
 
@@ -133,8 +131,6 @@ RSpec.describe Cinch::Plugins::SecretFascists do
         get_replies(msg("!chancellor #{chanc}", nick: pres))
         chan.messages.clear
 
-        # Until cinch-test's double-PM bug is fixed, this may emit some errors.
-        # That's OK.
         players.each { |p| get_replies(pm('!ja', nick: p)) }
         expect(chan.messages).to be_any { |x| x.include?('elected') }
         chan.messages.clear
