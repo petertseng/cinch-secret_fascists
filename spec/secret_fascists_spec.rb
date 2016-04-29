@@ -106,12 +106,18 @@ RSpec.describe Cinch::Plugins::SecretFascists do
 
       30.times {
         pres = @order.first
+        chanc = @order.last
 
-        get_replies(msg("!chancellor #{@order.last}", nick: pres))
+        get_replies(msg("!chancellor #{chanc}", nick: pres))
         expect(chan.messages).to be_all { |x| x.include?('selected Chancellor') }
         chan.messages.clear
 
-        players.each { |p| get_replies(pm('!nein', nick: p)) }
+        players.each { |p|
+          replies = get_replies_text(pm('!nein', nick: p))
+          expect(replies).to be_any { |t| t.include?('NEIN') }
+          expect(replies).to be_any { |t| t.include?("President #{pres}") }
+          expect(replies).to be_any { |t| t.include?("Chancellor #{chanc}") }
+        }
         expect(chan.messages).to be_any { |x| x.include?('rejected') }
 
         break if chan.messages.any? { |x| x.include?('have prevailed') }
@@ -131,7 +137,12 @@ RSpec.describe Cinch::Plugins::SecretFascists do
         get_replies(msg("!chancellor #{chanc}", nick: pres))
         chan.messages.clear
 
-        players.each { |p| get_replies(pm('!ja', nick: p)) }
+        players.each { |p|
+          replies = get_replies_text(pm('!ja', nick: p))
+          expect(replies).to be_any { |t| t.include?('JA') }
+          expect(replies).to be_any { |t| t.include?("President #{pres}") }
+          expect(replies).to be_any { |t| t.include?("Chancellor #{chanc}") }
+        }
         expect(chan.messages).to be_any { |x| x.include?('elected') }
         chan.messages.clear
 

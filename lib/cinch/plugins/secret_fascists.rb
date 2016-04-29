@@ -142,13 +142,15 @@ module Cinch; module Plugins; class SecretFascists < GameBot
     game = self.game_of(m)
     return unless game && game.users.include?(m.user)
 
-    voted = false
+    voted_election = nil
     if (command.downcase == 'ja' || command.downcase == 'nein')
       if m.channel
         m.reply("You MUST vote privately. Please send me a private vote with /msg #{m.bot.nick} ja or /msg #{m.bot.nick} nein", true)
         return
       end
-      voted = true
+      # Save this election since a third rejected government advances the round,
+      # so game.current_election will be nil after game.take_choice is called.
+      voted_election = game.current_election
     end
 
     args = args ? args.split : []
@@ -156,7 +158,7 @@ module Cinch; module Plugins; class SecretFascists < GameBot
     success, error = game.take_choice(m.user, command, *args)
 
     if success
-      if voted
+      if voted_election
         # the game doesn't ack the votes, we'll ack.
         m.user.send("You voted #{command.upcase} for President #{voted_election.president} and Chancellor #{voted_election.chancellor}.")
       end
